@@ -9,7 +9,9 @@ const router = express.Router();
 const ctrl = require('../controls')
 
 // signup
-router.post('/signup', validate(schemas.signupSchema), ctrl.signup)
+router.post('/signup',
+    // validate(schemas.signupSchema),
+    ctrl.signup)
 
 // signin
 // router.post('/signin', validateBody(schemas.signinSchema), ctrl.signin)
