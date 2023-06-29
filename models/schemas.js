@@ -12,7 +12,7 @@ const signupSchema = checkSchema({
     password: {
         isEmpty: {negated: true},
         isLength: {options: {min: 6}},
-        errorMessage: 'The password must be at least 6 characters, and must contain a symbol'
+        errorMessage: 'The password must be at least 6 characters'
     }
 });
 
@@ -21,7 +21,7 @@ const signinSchema = checkSchema({
     password: {
         isEmpty: {negated: true},
         isLength: {options: {min: 6}},
-        errorMessage: 'The password must be at least 6 characters, and must contain a symbol'
+        errorMessage: 'The password must be at least 6 characters'
     }
 });
 
@@ -30,3 +30,5 @@ const schemas = {
 }
 
 module.exports = schemas
+
+// errorMessage: 'The password must be at least 6 characters, and must contain a symbol'

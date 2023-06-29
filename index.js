@@ -29,7 +29,7 @@ const db = new sqlite3.Database(`./${db_path}.db`, function (err) {
 
 global.db = db;
 
-const {mainRouter,authRouter, readerRouter, authorRouter, userRouter} = require('./routes')
+const {mainRouter, authRouter, readerRouter, authorRouter, userRouter} = require('./routes')
 
 app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')
@@ -39,7 +39,7 @@ app.engine('html', require('ejs').renderFile)
 // app.use(express.static('scripts'));
 // app.use(express.static('public'))
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/', (req, res) => {
     res.send('Hello world')

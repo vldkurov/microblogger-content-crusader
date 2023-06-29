@@ -8,19 +8,33 @@ const signup = async (req, res, next) => {
 
     const {name, email, password} = req.body
 
-    let params = [name, email, password]
-    let sql = 'INSERT INTO authors (name, email, password) VALUES (?, ?, ?)'
-
-    await db.run(sql, params)
-
-    params = [email]
-    sql = 'SELECT * from authors WHERE email=?'
+    let params = [email]
+    let sql = 'SELECT name, email FROM authors WHERE email=?'
 
     await db.get(sql, params, function (err, rows) {
         if (err) {
             next(err)
+        } else if (rows) {
+            throw HttpError(409, "e-mail already in use")
+            // return res.status(409).json({
+            //     message: "e-mail already in use"
+            // })
         } else {
-            res.json({author: rows})
+            params = [name, email, password]
+            sql = 'INSERT INTO authors (name, email, password) VALUES (?, ?, ?)'
+
+            db.run(sql, params)
+
+            params = [email]
+            sql = 'SELECT * from authors WHERE email=?'
+
+            db.get(sql, params, function (err, rows) {
+                if (err) {
+                    next(err)
+                } else {
+                    res.status(201).json({author: rows})
+                }
+            })
         }
     })
 
