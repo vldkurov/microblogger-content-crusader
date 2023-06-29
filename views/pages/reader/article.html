@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+
+<%- include('../../partials/head.html')%>
+
+<body>
+<main>
+    <div class="container-fluid" style="padding-top: 10px; padding-bottom: 50px">
+
+        <div style="display: flex; justify-content: flex-end">
+            <a href="/reader/home/">back</a>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center">
+            <%- include('../../components/author-header.html', {title: blog.b_title, subtitle: blog.b_subtitle, author:
+            author.name});
+            %>
+        </div>
+
+        <div style="display: flex; justify-content: space-between">
+
+            <p class="fs-3 lh-lg"><%= article.a_title%></p>
+
+            <form action="/reader/article/like" method="post">
+                <input name="like" type="hidden" value="<%= article.likes %>">
+                <input name="article_id" type="hidden" value="<%= article.id %>">
+                <input name="reader_id" type="hidden" value="<%= author.id %>">
+                <button class="btn btn-success" type="submit">LIKE <%= article.likes %></button>
+            </form>
+        </div>
+
+        <p class="fs-5 lh-1"><%= article.a_subtitle%></p>
+
+        <p class="fs-6 lh-1"><%= article.body%></p>
+
+        <form action="/reader/article" method="post">
+            <input name="article_id" type="hidden" value="<%= article.id %>">
+            <div class="form-floating">
+                <textarea class="form-control" id="floatingTextarea2" name="comment" placeholder="Leave a comment here"
+                          rows="2" style="height: 100px"></textarea>
+                <label for="floatingTextarea2">Comments</label>
+            </div>
+            <input name="author_id" type="hidden" value="<%= author.id %>">
+            <button class="btn btn-success" style="margin-top: 10px; margin-bottom: 10px" type="submit">ADD COMMENT
+            </button>
+        </form>
+
+        <%- include('../../components/comments.html', {comments: comments, author: author}) %>
+
+    </div>
+
+</main>
+
+<footer>
+    <%- include('../../partials/footer.html') %>
+</footer>
+
+</body>
+</html>

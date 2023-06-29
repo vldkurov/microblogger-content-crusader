@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<%- include('../../partials/head.html')%>
+
+<body>
+
+<main>
+
+    <div class="container-fluid" style="padding-top: 10px">
+
+        <div style="display: flex; justify-content: space-between">
+            <p><strong>Microblogger: </strong>Reader Homepage</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center">
+            <%- include('../../components/author-header.html', {title: blog.b_title, subtitle: blog.b_subtitle, author:
+            author.name});
+            %>
+        </div>
+
+        <p class="fs-4">Articles</p>
+
+        <% if (published) { %>
+        <ul class="list-group">
+            <% published.forEach(function(article) {%>
+            <li class="list-group-item list-group-item-action" style="padding: 0">
+                <form action="/reader/article" method="GET">
+                    <input name="id" type="hidden" value="<%= article.id %>">
+                    <button class="btn" style="width: 100%" type="submit">
+                        <div style="display: flex; flex-direction: column; align-items: flex-start">
+                            <p class="fs-4"><%= article.a_title %></p>
+                            <p class="fs-5 lh-1"><%= article.a_subtitle %></p>
+                            <p class="fs-6 lh-1"><%= article.published %></p>
+                        </div>
+                    </button>
+                </form>
+            </li>
+            <% })%>
+        </ul>
+        <% } %>
+
+    </div>
+
+</main>
+
+<footer>
+    <%- include('../../partials/footer.html') %>
+</footer>
+
+</body>
+</html>

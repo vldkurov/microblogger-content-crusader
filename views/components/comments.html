@@ -1,0 +1,11 @@
+<ul class="list-group">
+    <% comments.forEach(function(comment) { %>
+    <li class="list-group-item list-group-item-primary">
+        <p class="fst-italic"><%= comment.body%></p>
+        <p class="fw-lighter lh-1"><strong class="fw-bold">posted: </strong><%= comment.posted %></p>
+        <p class="fw-lighter lh-1"><strong class="fw-bold">author: </strong><%= author.name %></p>
+    </li>
+    <% }) %>
+</ul>
+
+
