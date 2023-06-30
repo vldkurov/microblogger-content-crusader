@@ -1,7 +1,7 @@
 const authenticate = require('./authenticate')
-const validate = require('./validate')
+const {body} = require('./validate')
 
 module.exports = {
     authenticate,
-    validate
+    body,
 }

@@ -1,5 +1,6 @@
-const {signup,
-    // signin,
+const {
+    signup,
+    signin,
     // logout
 } = require('./auth')
 const {
@@ -17,7 +18,8 @@ const {reader, article, comment, like} = require('./reader')
 
 module.exports = {
     signup,
-    // signin, logout,
+    signin,
+    // logout,
     home,
     edit,
     update,

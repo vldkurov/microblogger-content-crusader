@@ -1,51 +1,40 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const {ctrlWrapper, HttpError} = require("../../helpers");
+const {ctrlWrapper, handleSignin, HttpError} = require("../../helpers");
 
-const secret = process.env.SECRET || 'secret word';
-const signin = async (req, res, next) => {
+const SECRET_KEY = process.env.SECRET || 'secret word';
+const signin = (req, res, next) => {
 
     const {email, password} = req.body
 
     let params = [email]
-    let sql = 'SELECT * FROM authors WHERE author_email=?'
+    let sql = 'SELECT * FROM authors WHERE email=?'
 
-    await db.all(sql, params, async function (err, rows) {
-        if (err) {
-            next(err)
-        } else {
-            if (!rows.some(row => row.author_email === email)) {
-                // throw HttpError(401, 'Email or password invalid')
-                res.send('Email or password invalid')
-                throw HttpError(401, 'Email or password invalid')
-            }
-            const passwordCompare = await bcrypt.compare(password, rows[0].author_password)
-            if (!passwordCompare) {
-                // throw HttpError(401, 'Email or password invalid')
-                res.send('Email or password invalid')
-                throw HttpError(401, 'Email or password invalid')
-            }
+    db.get(sql,
+        params,
+        async function (err, rows) {
+            if (err) {
+                next(err)
+            } else if (!rows) {
+                res.status(401).json({
+                    message: 'E-mail or password invalid'
+                })
+            } else {
 
-            const payload = {
-                email: email
-            }
+                const passwordCompare = await bcrypt.compare(password, rows.password)
 
-            const token = jwt.sign(payload, secret, {expiresIn: '1d'})
-
-            params = [token, 1, email]
-            sql = 'UPDATE authors SET token=?, isLogin=? WHERE author_email=?'
-
-            db.run(sql, params, function (err, rows) {
-                if (err) {
-                    next(err)
+                if (!passwordCompare) {
+                    res.status(401).json({
+                        message: 'E-mail or password invalid'
+                    })
                 } else {
-                    // res.redirect('/author/home')
-                    res.send('Signin successfully')
+                    handleSignin(rows, SECRET_KEY, res, next, email)
                 }
-            })
-        }
-    })
+            }
+        })
+
+
 }
 
 module.exports = {

@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const {authenticate, validate} = require('../middleware')
+const {authenticate} = require('../middleware')
+
+const validate = require('../middleware')
 
 const {schemas} = require('../models')
 
@@ -21,6 +23,6 @@ router.post('/article/delete', ctrl.remove)
 
 router.get("/settings", ctrl.settings)
 
-router.post("/settings", validate(schemas.settingsSchema), ctrl.updateSettings)
+router.post("/settings", validate.body(schemas.settingsSchema), ctrl.updateSettings)
 
 module.exports = router

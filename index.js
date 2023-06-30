@@ -39,7 +39,7 @@ app.engine('html', require('ejs').renderFile)
 // app.use(express.static('scripts'));
 // app.use(express.static('public'))
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
     res.send('Hello world')

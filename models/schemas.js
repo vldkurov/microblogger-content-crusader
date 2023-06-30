@@ -1,4 +1,6 @@
-const {checkSchema} = require("express-validator");
+const {checkSchema, ExpressValidator, CustomValidationChain, CustomSchema} = require("express-validator");
+
+const {checkEmailNotInUse} = require('../helpers')
 
 const settingsSchema = checkSchema({
     title: {notEmpty: true},
@@ -8,7 +10,13 @@ const settingsSchema = checkSchema({
 
 const signupSchema = checkSchema({
     name: {notEmpty: true, isString: true},
-    email: {notEmpty: true, isEmail: true, errorMessage: 'Must be a valid e-mail address'},
+    email: {
+        notEmpty: true,
+        isEmail: {bail: true},
+        trim: true,
+        normalizeEmail: true,
+        errorMessage: 'Must be a valid e-mail address'
+    },
     password: {
         isEmpty: {negated: true},
         isLength: {options: {min: 6}},
@@ -17,7 +25,13 @@ const signupSchema = checkSchema({
 });
 
 const signinSchema = checkSchema({
-    email: {notEmpty: true, isEmail: true, errorMessage: 'Must be a valid e-mail address'},
+    email: {
+        notEmpty: true,
+        isEmail: {bail: true},
+        trim: true,
+        normalizeEmail: true,
+        errorMessage: 'Must be a valid e-mail address'
+    },
     password: {
         isEmpty: {negated: true},
         isLength: {options: {min: 6}},
