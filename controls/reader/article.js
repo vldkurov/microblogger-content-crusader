@@ -1,12 +1,11 @@
 const async = require('async')
 
-const {authenticate} = require('../../middleware')
-
 const {ctrlWrapper} = require("../../helpers");
 
 const article = async (req, res, next) => {
 
-    let params = [authenticate()]
+    const {id: owner} = req.user
+    let params = [owner]
 
     const result = {}
 
@@ -41,10 +40,13 @@ const article = async (req, res, next) => {
             },
 
             function (callback) {
-        
-                let sql = "SELECT * FROM authors LEFT JOIN articles A ON authors.id=A.author_id WHERE authors.id=? AND A.id=?"
 
-                db.get(sql, [...params, req.query.id], function (err, rows) {
+                // let sql = "SELECT * FROM authors LEFT JOIN articles A ON authors.id=A.author_id WHERE authors.id=? AND A.id=?"
+                const {id} = req.query
+                let params = [id]
+                let sql = "SELECT * FROM articles WHERE id=?"
+
+                db.get(sql, params, function (err, rows) {
                     if (err) {
                         return callback(err)
                     } else {
@@ -73,12 +75,18 @@ const article = async (req, res, next) => {
                 next(err)
             } else {
                 return result
-                    ? res.render('pages/reader/article.html', {
+                    ? res.json({
                         author: result.author,
                         blog: result.blog,
                         article: result.article,
                         comments: result.comments
                     })
+                    // ? res.render('pages/reader/article.html', {
+                    //     author: result.author,
+                    //     blog: result.blog,
+                    //     article: result.article,
+                    //     comments: result.comments
+                    // })
                     : res.json({
                         message: `No records found with the id ${params}`
                     })

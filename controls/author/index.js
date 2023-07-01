@@ -1,4 +1,4 @@
-const {home} = require('./home')
+const {authorHome} = require('./authorHome')
 const {edit} = require('./edit')
 const {update} = require('./update')
 const {draft} = require('./draft')
@@ -9,7 +9,7 @@ const {remove} = require('./remove')
 
 
 module.exports = {
-    home,
+    authorHome,
     edit,
     update,
     draft,

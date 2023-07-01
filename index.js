@@ -54,8 +54,13 @@ app.use(express.static('public', options))
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
-    res.send('Hello world')
-    // res.render('index.html')
+    // res.send('Hello world')
+    res.render('index.html')
+})
+
+app.use((req, res, next) => {
+    req.headers['User-Agent'] = 'zendx/sop API';
+    next()
 })
 
 app.use((req, res, next) => {

@@ -9,7 +9,9 @@ const {schemas} = require('../models')
 
 const ctrl = require('../controls')
 
-router.get('/home', authenticate, ctrl.home)
+router.get('/home',
+    // authenticate,
+    ctrl.authorHome)
 
 router.post("/home", authenticate, ctrl.publish)
 

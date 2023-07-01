@@ -19,7 +19,7 @@ const authenticate = async (req, res, next) => {
         await db.get(sql, params, function (err, rows) {
             if (err) {
                 next(err)
-            } else if (!rows) {
+            } else if (!rows || !rows.token || rows.token !== token) {
                 next(HttpError(401))
             } else {
                 req.user = rows

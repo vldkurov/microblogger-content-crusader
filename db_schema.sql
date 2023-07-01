@@ -43,7 +43,16 @@ CREATE TABLE IF NOT EXISTS comments
     posted     TEXT NOT NULL,
     author_id  INT,
     article_id INT,
-    FOREIGN KEY (author_id) REFERENCES authors (id),
+    FOREIGN KEY (author_id) REFERENCES authors (id) ON DELETE CASCADE,
+    FOREIGN KEY (article_id) REFERENCES articles (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS likes
+(
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    author_id  INT,
+    article_id INT,
+    FOREIGN KEY (author_id) REFERENCES authors (id) ON DELETE CASCADE,
     FOREIGN KEY (article_id) REFERENCES articles (id) ON DELETE CASCADE
 );
 

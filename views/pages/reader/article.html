@@ -8,7 +8,7 @@
     <div class="container-fluid" style="padding-top: 10px; padding-bottom: 50px">
 
         <div style="display: flex; justify-content: flex-end">
-            <a href="/reader/home/">back</a>
+            <a href="/authorHome/authorHome/">back</a>
         </div>
 
         <div style="display: flex; flex-direction: column; align-items: center">
@@ -21,7 +21,7 @@
 
             <p class="fs-3 lh-lg"><%= article.a_title%></p>
 
-            <form action="/reader/article/like" method="post">
+            <form action="/authorHome/article/like" method="post">
                 <input name="like" type="hidden" value="<%= article.likes %>">
                 <input name="article_id" type="hidden" value="<%= article.id %>">
                 <input name="reader_id" type="hidden" value="<%= author.id %>">
@@ -33,7 +33,7 @@
 
         <p class="fs-6 lh-1"><%= article.body%></p>
 
-        <form action="/reader/article" method="post">
+        <form action="/authorHome/article" method="post">
             <input name="article_id" type="hidden" value="<%= article.id %>">
             <div class="form-floating">
                 <textarea class="form-control" id="floatingTextarea2" name="comment" placeholder="Leave a comment here"

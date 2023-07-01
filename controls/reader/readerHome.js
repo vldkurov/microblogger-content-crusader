@@ -1,12 +1,12 @@
 const async = require('async')
 
-const {authenticate} = require('../../middleware')
-
 const {ctrlWrapper} = require("../../helpers");
 
-const reader = async (req, res, next) => {
+const readerHome = async (req, res, next) => {
 
-    let params = [authenticate()]
+    const {id: owner} = req.user
+
+    let params = [owner]
 
     const result = {}
 
@@ -42,9 +42,11 @@ const reader = async (req, res, next) => {
 
             function (callback) {
 
-                let sql = "SELECT A.id, A.a_title, A.a_subtitle, A.created, A.modified, A.published, A.likes, A.status, A.body FROM authors LEFT JOIN articles A ON authors.id=A.author_id WHERE authors.id=? ORDER BY A.published DESC"
+                let params = []
+                // let sql = "SELECT A.id, A.a_title, A.a_subtitle, A.created, A.modified, A.published, A.likes, A.status, A.body FROM authors LEFT JOIN articles A ON authors.id=A.author_id WHERE authors.id=? ORDER BY A.published DESC"
+                let sql = "SELECT * FROM articles ORDER BY published DESC"
 
-                db.all(sql, [...params], function (err, rows) {
+                db.all(sql, function (err, rows) {
                     if (err) {
                         return callback(err)
                     } else {
@@ -59,11 +61,16 @@ const reader = async (req, res, next) => {
                 next(err)
             } else {
                 return result
-                    ? res.render('pages/reader/home.html', {
+                    ? res.json({
                         author: result.author,
                         blog: result.blog,
                         published: result.articles.filter(({status}) => status === 'Published')
                     })
+                    // ? res.render('pages/home/home.html', {
+                    //     author: result.author,
+                    //     blog: result.blog,
+                    //     published: result.articles.filter(({status}) => status === 'Published')
+                    // })
                     : res.json({
                         message: `No records found with the id ${params}`
                     })
@@ -73,5 +80,5 @@ const reader = async (req, res, next) => {
 }
 
 module.exports = {
-    reader: ctrlWrapper(reader)
+    readerHome: ctrlWrapper(readerHome)
 }

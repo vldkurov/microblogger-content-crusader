@@ -1,10 +1,11 @@
 const {
     signup,
     signin,
-    // logout
+    current,
+    logout
 } = require('./auth')
 const {
-    home,
+    authorHome,
     edit,
     update,
     draft,
@@ -14,13 +15,14 @@ const {
     remove
 } = require('./author')
 
-const {reader, article, comment, like} = require('./reader')
+const {readerHome, article, comment, like} = require('./reader')
 
 module.exports = {
     signup,
     signin,
-    // logout,
-    home,
+    current,
+    logout,
+    authorHome,
     edit,
     update,
     draft,
@@ -28,7 +30,7 @@ module.exports = {
     settings,
     updateSettings,
     remove,
-    reader,
+    readerHome,
     article,
     comment,
     like

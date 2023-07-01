@@ -4,10 +4,13 @@ const mime = require('mime-types')
 
 const {ctrlWrapper} = require("../../helpers");
 
-const home = async (req, res, next) => {
+const authorHome = async (req, res, next) => {
 
-    const {id: owner} = req.user
     // const token = `Bearer` + ` ` + `${req.user.token}}`
+
+    // const {id: owner} = req.user
+    const owner = 1
+
     // res.set('Authorization', token)
     let params = [owner]
 
@@ -62,22 +65,22 @@ const home = async (req, res, next) => {
                 next(err)
             } else {
                 // res.set("Content-Type", mime.contentType('text/css'));
-                // res.setHeader("Content-Type", mime.lookup('pages/author/home.html'));
-                // res.set('Content-Type', mime.lookup('pages/author/home.html'));
+                // res.setHeader("Content-Type", mime.lookup('pages/author/authorHome.html'));
+                // res.set('Content-Type', mime.lookup('pages/author/authorHome.html'));
                 // res.set('Authorization', 'Bearer ')
                 return result
-                    ? res.json({
-                        author: result.author,
-                        blog: result.blog,
-                        draft: result.articles.filter(({status}) => status === 'Draft'),
-                        published: result.articles.filter(({status}) => status === 'Published')
-                    })
-                    // ? res.render('pages/author/home.html', {
+                    // ? res.json({
                     //     author: result.author,
                     //     blog: result.blog,
                     //     draft: result.articles.filter(({status}) => status === 'Draft'),
                     //     published: result.articles.filter(({status}) => status === 'Published')
                     // })
+                    ? res.render('pages/author/home.html', {
+                        author: result.author,
+                        blog: result.blog,
+                        draft: result.articles.filter(({status}) => status === 'Draft'),
+                        published: result.articles.filter(({status}) => status === 'Published')
+                    })
                     : res.json({
                         message: `No records found with the id ${params}`
                     })
@@ -87,5 +90,5 @@ const home = async (req, res, next) => {
 }
 
 module.exports = {
-    home: ctrlWrapper(home)
+    authorHome: ctrlWrapper(authorHome)
 }

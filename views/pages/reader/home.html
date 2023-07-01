@@ -25,7 +25,7 @@
         <ul class="list-group">
             <% published.forEach(function(article) {%>
             <li class="list-group-item list-group-item-action" style="padding: 0">
-                <form action="/reader/article" method="GET">
+                <form action="/authorHome/article" method="GET">
                     <input name="id" type="hidden" value="<%= article.id %>">
                     <button class="btn" style="width: 100%" type="submit">
                         <div style="display: flex; flex-direction: column; align-items: flex-start">

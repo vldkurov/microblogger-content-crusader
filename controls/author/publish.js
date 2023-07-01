@@ -13,7 +13,6 @@ const publish = (req, res, next) => {
             res.redirect('/author/home')
         }
     })
-
 }
 
 module.exports = {

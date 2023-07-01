@@ -1,9 +1,11 @@
 const {ctrlWrapper} = require("../../helpers");
 const comment = async (req, res, next) => {
 
-    const {article_id, comment, author_id} = req.body
+    const {id: owner} = req.user
 
-    let params = [comment, article_id, author_id]
+    const {article_id, comment} = req.body
+
+    let params = [comment, article_id, owner]
     let sql = 'INSERT INTO comments (body, posted, article_id, author_id) VALUES (?, datetime(\'now\', \'localtime\'), ?, ?)'
 
     await db.run(sql, params, function (err, rows) {

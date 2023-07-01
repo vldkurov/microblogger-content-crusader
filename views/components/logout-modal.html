@@ -1,0 +1,20 @@
+<!---LOGOUT MODAL--->
+<div aria-hidden="true" aria-labelledby="modalLogoutLabel" class="modal fade" id="modal-logout" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="logoutModalLabel">LOGOUT</h1>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <p>You are about to leave the app. Are you sure?</p>
+            </div>
+            <div class="modal-footer">
+                <form action="/auth/logout" id="logout-form" method="POST">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-primary" type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

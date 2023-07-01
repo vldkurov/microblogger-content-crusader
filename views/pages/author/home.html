@@ -5,6 +5,10 @@
 
 <body>
 
+<header>
+    <%- include('../../partials/header.html') %>
+</header>
+
 <main>
 
     <div class="container-fluid" style="padding-top: 10px; padding-bottom: 50px">
@@ -45,7 +49,7 @@
                             <input name="id" type="hidden" value="<%= article.id %>">
                             <button class="btn btn-warning" type="submit">EDIT</button>
                         </form>
-                        <form action="/author/home" method="POST">
+                        <form action="/author/authorHome" method="POST">
                             <input name="id" type="hidden" value="<%= article.id %>">
                             <button class="btn btn-success" onclick="publish()" type="submit">PUBLISH</button>
                             <script>
@@ -105,7 +109,7 @@
                             </button>
                             <script>
                                 function share(id) {
-                                    alert(`http://localhost:3000/reader/article?id=${id}`);
+                                    alert(`http://localhost:3000/authorHome/article?id=${id}`);
                                 }
                             </script>
                         </form>
@@ -128,7 +132,6 @@
         </table>
 
     </div>
-
 
 </main>
 
