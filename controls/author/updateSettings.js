@@ -3,17 +3,18 @@ const async = require("async");
 const {ctrlWrapper} = require("../../helpers");
 const updateSettings = async (req, res, next) => {
 
-    let params = []
+    const {id: owner} = req.user
 
     await async.parallel([
 
             function (callback) {
 
-                const {author, author_id} = req.body
+                const {author: name} = req.body
 
+                let params = [name, owner]
                 let sql = 'UPDATE authors SET name=? WHERE id=?'
 
-                db.run(sql, [...params, author, author_id], function (err, rows) {
+                db.run(sql, params, function (err, rows) {
                     if (err) {
                         return callback(err)
                     } else {
@@ -26,9 +27,10 @@ const updateSettings = async (req, res, next) => {
 
                 const {title, subtitle, blog_id} = req.body
 
+                let params = [title, subtitle, blog_id]
                 let sql = "UPDATE blogs SET b_title=?, b_subtitle=? WHERE id=?"
 
-                db.run(sql, [...params, title, subtitle, blog_id], function (err, rows) {
+                db.run(sql, params, function (err, rows) {
                     if (err) {
                         return callback(err)
                     } else {

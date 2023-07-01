@@ -6,7 +6,8 @@ const {ctrlWrapper} = require("../../helpers");
 
 const settings = async (req, res, next) => {
 
-    let params = [authenticate()]
+    const {id: owner} = req.user
+    let params = [owner]
 
     const result = {}
 
@@ -45,10 +46,14 @@ const settings = async (req, res, next) => {
                 next(err)
             } else {
                 return result
-                    ? res.render('pages/author/settings.html', {
+                    ? res.json({
                         author: result.author,
                         blog: result.blog,
                     })
+                    // ? res.render('pages/author/settings.html', {
+                    //     author: result.author,
+                    //     blog: result.blog,
+                    // })
                     : res.json({
                         message: `No records found with the id ${params}`
                     })

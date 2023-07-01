@@ -2,13 +2,14 @@ const async = require('async')
 
 const mime = require('mime-types')
 
-const {authenticate} = require('../../middleware')
-
 const {ctrlWrapper} = require("../../helpers");
 
 const home = async (req, res, next) => {
 
-    let params = [authenticate()]
+    const {id: owner} = req.user
+    // const token = `Bearer` + ` ` + `${req.user.token}}`
+    // res.set('Authorization', token)
+    let params = [owner]
 
     const result = {}
 
@@ -63,13 +64,20 @@ const home = async (req, res, next) => {
                 // res.set("Content-Type", mime.contentType('text/css'));
                 // res.setHeader("Content-Type", mime.lookup('pages/author/home.html'));
                 // res.set('Content-Type', mime.lookup('pages/author/home.html'));
+                // res.set('Authorization', 'Bearer ')
                 return result
-                    ? res.render('pages/author/home.html', {
+                    ? res.json({
                         author: result.author,
                         blog: result.blog,
                         draft: result.articles.filter(({status}) => status === 'Draft'),
                         published: result.articles.filter(({status}) => status === 'Published')
                     })
+                    // ? res.render('pages/author/home.html', {
+                    //     author: result.author,
+                    //     blog: result.blog,
+                    //     draft: result.articles.filter(({status}) => status === 'Draft'),
+                    //     published: result.articles.filter(({status}) => status === 'Published')
+                    // })
                     : res.json({
                         message: `No records found with the id ${params}`
                     })

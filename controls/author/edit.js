@@ -6,7 +6,8 @@ const {ctrlWrapper} = require("../../helpers");
 
 const edit = async (req, res, next) => {
 
-    let params = [authenticate()]
+    const {id: owner} = req.user
+    let params = [owner]
 
     const result = {}
 
@@ -48,7 +49,7 @@ const edit = async (req, res, next) => {
                     if (err) {
                         return callback(err)
                     } else {
-                        result.edit = rows
+                        result.edit = rows ? rows : {}
                         callback()
                     }
                 })
@@ -59,11 +60,16 @@ const edit = async (req, res, next) => {
                 next(err)
             } else {
                 return result
-                    ? res.render('pages/author/edit.html', {
+                    ? res.json({
                         author: result.author,
                         blog: result.blog,
                         edit: result.edit
                     })
+                    // ? res.render('pages/author/edit.html', {
+                    //     author: result.author,
+                    //     blog: result.blog,
+                    //     edit: result.edit
+                    // })
                     : res.json({
                         message: `No records found with the id ${params}`
                     })

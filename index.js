@@ -35,10 +35,22 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')
 app.engine('html', require('ejs').renderFile)
 
+const options = {
+    dotfiles: 'ignore',
+    etag: false,
+    extensions: ['htm', 'html'],
+    index: false,
+    maxAge: '1d',
+    redirect: false,
+    setHeaders(res, path, stat) {
+        res.set('x-timestamp', Date.now())
+    }
+}
+
 // app.use(express.static('views'));
 // app.use(express.static('scripts'));
-// app.use(express.static('public'))
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public', options))
+// app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
@@ -46,12 +58,22 @@ app.get('/', (req, res) => {
     // res.render('index.html')
 })
 
+app.use((req, res, next) => {
+    next();
+});
 
 // app.use('/', mainRouter)
 app.use('/auth', authRouter)
 app.use('/author', authorRouter);
 app.use('/reader', readerRouter)
 // app.use('/user', userRouter);
+
+app.use(function (err, req, res, next) {
+    // res.status(err.status || 500)
+    // res.render('error')
+    const {status = 500, message = 'Server Error'} = err;
+    res.status(status).json({message});
+})
 
 app.listen(port, () => {
     console.log(`Microblogger listening on port ${port}`);

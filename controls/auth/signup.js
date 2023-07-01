@@ -52,6 +52,14 @@ const signup = async (req, res, next) => {
                     if (err) {
                         next(err)
                     } else {
+
+                        const {id} = rows
+
+                        params = [id]
+                        sql = 'INSERT INTO blogs (author_id) VALUES (?)'
+
+                        db.run(sql, params)
+
                         handleSignin(rows, SECRET_KEY, res, next, email)
                     }
                 })

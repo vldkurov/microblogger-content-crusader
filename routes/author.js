@@ -9,20 +9,20 @@ const {schemas} = require('../models')
 
 const ctrl = require('../controls')
 
-router.get('/home', ctrl.home)
+router.get('/home', authenticate, ctrl.home)
 
-router.post("/home", ctrl.publish)
+router.post("/home", authenticate, ctrl.publish)
 
-router.get("/article/edit", ctrl.edit)
+router.get("/article/edit", authenticate, ctrl.edit)
 
-router.post("/article/edit", ctrl.update)
+router.post("/article/edit", authenticate, ctrl.update)
 
-router.get("/article/draft", ctrl.draft)
+router.get("/article/draft", authenticate, ctrl.draft)
 
-router.post('/article/delete', ctrl.remove)
+router.post('/article/delete', authenticate, ctrl.remove)
 
-router.get("/settings", ctrl.settings)
+router.get("/settings", authenticate, ctrl.settings)
 
-router.post("/settings", validate.body(schemas.settingsSchema), ctrl.updateSettings)
+router.post("/settings", authenticate, validate.body(schemas.settingsSchema), ctrl.updateSettings)
 
 module.exports = router
