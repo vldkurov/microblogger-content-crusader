@@ -13,7 +13,7 @@ const like = async (req, res, next) => {
             next(err)
         } else if (rows) {
             res.json({
-                message: 'You have already liked this article'
+                message: 'You already like this article'
             })
         } else {
 

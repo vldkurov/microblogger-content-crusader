@@ -43,7 +43,6 @@ const readerHome = async (req, res, next) => {
             function (callback) {
 
                 let params = []
-                // let sql = "SELECT A.id, A.a_title, A.a_subtitle, A.created, A.modified, A.published, A.likes, A.status, A.body FROM authors LEFT JOIN articles A ON authors.id=A.author_id WHERE authors.id=? ORDER BY A.published DESC"
                 let sql = "SELECT * FROM articles ORDER BY published DESC"
 
                 db.all(sql, function (err, rows) {
@@ -61,16 +60,16 @@ const readerHome = async (req, res, next) => {
                 next(err)
             } else {
                 return result
-                    ? res.json({
-                        author: result.author,
-                        blog: result.blog,
-                        published: result.articles.filter(({status}) => status === 'Published')
-                    })
-                    // ? res.render('pages/home/home.html', {
+                    // ? res.json({
                     //     author: result.author,
                     //     blog: result.blog,
                     //     published: result.articles.filter(({status}) => status === 'Published')
                     // })
+                    ? res.render('pages/reader/home.html', {
+                        author: result.author,
+                        blog: result.blog,
+                        published: result.articles.filter(({status}) => status === 'Published')
+                    })
                     : res.json({
                         message: `No records found with the id ${params}`
                     })

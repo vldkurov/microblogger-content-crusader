@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 
 const {ctrlWrapper, handleSignin, HttpError} = require("../../helpers");
 
@@ -28,6 +27,7 @@ const signin = (req, res, next) => {
                     res.status(401).json({
                         message: 'E-mail or password invalid'
                     })
+
                 } else {
                     handleSignin(rows, SECRET_KEY, res, next, email)
                 }

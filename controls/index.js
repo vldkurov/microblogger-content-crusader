@@ -1,9 +1,12 @@
+const {main} = require('./main')
+
 const {
     signup,
     signin,
     current,
     logout
 } = require('./auth')
+
 const {
     authorHome,
     edit,
@@ -18,6 +21,7 @@ const {
 const {readerHome, article, comment, like} = require('./reader')
 
 module.exports = {
+    main,
     signup,
     signin,
     current,

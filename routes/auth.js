@@ -22,10 +22,4 @@ router.get('/current', headers, authenticate, ctrl.current)
 // logout
 router.post('/logout', headers, authenticate, ctrl.logout)
 
-// sample
-// router.get('/sample', (req, res) => {
-//     res.render('pages/author/sample.html')
-// })
-
-
 module.exports = router

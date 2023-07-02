@@ -1,6 +1,4 @@
-const {checkSchema, ExpressValidator, CustomValidationChain, CustomSchema} = require("express-validator");
-
-const {checkEmailNotInUse} = require('../helpers')
+const {checkSchema} = require("express-validator");
 
 const settingsSchema = checkSchema({
     title: {notEmpty: true},
@@ -39,8 +37,12 @@ const signinSchema = checkSchema({
     }
 });
 
+const commentsSchema = checkSchema({
+    comment: {isEmpty: {negated: true}},
+});
+
 const schemas = {
-    settingsSchema, signupSchema, signinSchema
+    settingsSchema, signupSchema, signinSchema, commentsSchema
 }
 
 module.exports = schemas

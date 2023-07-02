@@ -1,9 +1,9 @@
-<ul class="list-group">
+<ul class="list-group row-gap-1">
     <% comments.forEach(function(comment) { %>
     <li class="list-group-item list-group-item-primary">
         <p class="fst-italic"><%= comment.body%></p>
         <p class="fw-lighter lh-1"><strong class="fw-bold">posted: </strong><%= comment.posted %></p>
-        <p class="fw-lighter lh-1"><strong class="fw-bold">author: </strong><%= author.name %></p>
+        <p class="fw-lighter lh-1"><strong class="fw-bold">by: </strong><%= comment.name %></p>
     </li>
     <% }) %>
 </ul>

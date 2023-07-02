@@ -13,7 +13,7 @@ const article = async (req, res, next) => {
 
             function (callback) {
 
-                let sql = 'SELECT id, name, email, token, isLogin FROM authors WHERE id=?'
+                let sql = 'SELECT id, name, isLogin FROM authors WHERE id=?'
 
                 db.get(sql, [...params], function (err, rows) {
                     if (err) {
@@ -41,10 +41,9 @@ const article = async (req, res, next) => {
 
             function (callback) {
 
-                // let sql = "SELECT * FROM authors LEFT JOIN articles A ON authors.id=A.author_id WHERE authors.id=? AND A.id=?"
                 const {id} = req.query
-                let params = [id]
-                let sql = "SELECT * FROM articles WHERE id=?"
+                params = [id]
+                let sql = 'SELECT articles.id, a_title, a_subtitle, created, modified, published, likes, status, body, name FROM articles, authors WHERE articles.id=? AND author_id=authors.id'
 
                 db.get(sql, params, function (err, rows) {
                     if (err) {
@@ -58,7 +57,7 @@ const article = async (req, res, next) => {
 
             function (callback) {
 
-                let sql = 'SELECT C.id, C.body, C.posted, C.author_id FROM articles LEFT JOIN comments C ON articles.id=C.article_id WHERE articles.id=? ORDER BY C.posted DESC'
+                let sql = 'SELECT comments.id, comments.body, comments.posted, comments.author_id, comments.article_id, name, articles.id FROM comments, authors, articles WHERE comments.article_id=articles.id AND comments.author_id=authors.id AND articles.id=? ORDER BY comments.posted DESC'
 
                 db.all(sql, [req.query.id], function (err, rows) {
                     if (err) {
@@ -75,18 +74,18 @@ const article = async (req, res, next) => {
                 next(err)
             } else {
                 return result
-                    ? res.json({
-                        author: result.author,
-                        blog: result.blog,
-                        article: result.article,
-                        comments: result.comments
-                    })
-                    // ? res.render('pages/reader/article.html', {
+                    // ? res.json({
                     //     author: result.author,
                     //     blog: result.blog,
                     //     article: result.article,
                     //     comments: result.comments
                     // })
+                    ? res.render('pages/reader/article.html', {
+                        author: result.author,
+                        blog: result.blog,
+                        article: result.article,
+                        comments: result.comments
+                    })
                     : res.json({
                         message: `No records found with the id ${params}`
                     })

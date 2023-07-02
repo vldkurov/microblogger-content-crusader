@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS blogs
     b_title    TEXT NOT NULL DEFAULT 'Blog Title',
     b_subtitle TEXT NOT NULL DEFAULT 'Blog Subtitle',
     author_id  INT, --the user that the blog belongs to
-    FOREIGN KEY (author_id) REFERENCES authors (id)
+    FOREIGN KEY (author_id) REFERENCES authors (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS articles
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS articles
     status     VARCHAR(16),
     body       TEXT         NOT NULL DEFAULT 'Article Body',
     author_id  INT, --the user that the record belongs to
-    FOREIGN KEY (author_id) REFERENCES authors (id)
+    FOREIGN KEY (author_id) REFERENCES authors (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS comments

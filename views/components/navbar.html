@@ -16,10 +16,13 @@
                     <a class="nav-link" data-bs-target="#modal-account" data-bs-toggle="modal" href="#">Account</a>
                 </li>
                 <li class="nav-item logged-in">
-                    <a class="nav-link" data-bs-target="#modal-logout" data-bs-toggle="modal" href="#">Logout</a>
+                    <a class="nav-link" href="/author/home/">Author</a>
                 </li>
                 <li class="nav-item logged-in">
-                    <a class="nav-link" href="/author/home/">Author</a>
+                    <a class="nav-link" href="/reader/home/">Reader</a>
+                </li>
+                <li class="nav-item logged-in">
+                    <a class="nav-link" data-bs-target="#modal-logout" data-bs-toggle="modal" href="#">Logout</a>
                 </li>
                 <li class="nav-item logged-out">
                     <a class="nav-link" data-bs-target="#modal-signin" data-bs-toggle="modal" href="#">Sign in</a>
@@ -32,17 +35,17 @@
     </div>
 </nav>
 
-<script>
-    const loggedOutLinks = document.querySelectorAll('.logged-out')
-    const loggedInLinks = document.querySelectorAll('.logged-in')
+<!--<script>-->
+<!--    const loggedOutLinks = document.querySelectorAll('.logged-out')-->
+<!--    const loggedInLinks = document.querySelectorAll('.logged-in')-->
 
-    const setUpUI = (author) => {
-        if (author) {
-            loggedInLinks.forEach(item => item.style.display = 'block')
-            loggedOutLinks.forEach(item => item.style.display = 'none')
-        } else {
-            loggedInLinks.forEach(item => item.style.display = 'none')
-            loggedOutLinks.forEach(item => item.style.display = 'block')
-        }
-    }
-</script>
+<!--    const setUpUI = (author) => {-->
+<!--        if (author) {-->
+<!--            loggedInLinks.forEach(item => item.style.display = 'block')-->
+<!--            loggedOutLinks.forEach(item => item.style.display = 'none')-->
+<!--        } else {-->
+<!--            loggedInLinks.forEach(item => item.style.display = 'none')-->
+<!--            loggedOutLinks.forEach(item => item.style.display = 'block')-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->

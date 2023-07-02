@@ -1,7 +1,5 @@
 const async = require("async");
 
-const {authenticate} = require('../../middleware')
-
 const {ctrlWrapper} = require("../../helpers");
 
 const edit = async (req, res, next) => {

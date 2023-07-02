@@ -6,7 +6,7 @@
 <body>
 
 <header>
-
+    <%- include('../partials/header.html') %>
 </header>
 
 <main>
@@ -14,8 +14,8 @@
     <div class="container-fluid" style="padding-top: 10px">
 
         <div style="display: flex; justify-content: space-between">
-            <p><strong>Microblogger: </strong>Author Settings</p>
-            <a href="/author/settings/">back</a>
+            <!--            <p><strong>Microblogger: </strong>Author Settings</p>-->
+            <!--            <a href="/author/settings/">back</a>-->
         </div>
 
         <h1>Error</h1>
@@ -54,6 +54,12 @@
 <footer>
     <%- include('../partials/footer.html') %>
 </footer>
+
+<!---LOGOUT MODAL--->
+<%- include('../../components/logout-modal.html') %>
+
+<!---ACCOUNT MODAL--->
+<%- include('../../components/account-modal.html', {name: author.name, email: author.email}) %>
 
 <script crossorigin="anonymous"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"

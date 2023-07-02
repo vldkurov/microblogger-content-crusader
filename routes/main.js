@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-// index page
-router.get('/', function (req, res) {
-    res.render('index.html');
-});
+const ctrl = require('../controls')
+
+router.get('/', ctrl.main)
 
 module.exports = router

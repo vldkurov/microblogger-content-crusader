@@ -10,22 +10,6 @@ const signup = async (req, res, next) => {
 
     const hashPassword = await bcrypt.hash(password, 10)
 
-    // let params = [name, email, hashPassword]
-    // let sql = 'INSERT INTO authors (name, email, password) VALUES (?, ?, ?)'
-    //
-    // db.run(sql, params)
-    //
-    // params = [email]
-    // sql = 'SELECT * from authors WHERE email=?'
-    //
-    // db.get(sql, params, function (err, rows) {
-    //     if (err) {
-    //         next(err)
-    //     } else {
-    //         res.status(201).json({author: rows})
-    //     }
-    // })
-
     let params = [email]
     let sql = 'SELECT * FROM authors WHERE email=?'
 

@@ -7,7 +7,14 @@
                 <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
             </div>
             <div class="modal-body">
-                <p>Account details content</p>
+                <div style="display: flex; justify-content: space-between">
+                    <p class="fw-bold">author</p>
+                    <p class="fw-lighter"><%= name%></p>
+                </div>
+                <div style="display: flex; justify-content: space-between">
+                    <p class="fw-bold">e-mail</p>
+                    <p class="fw-lighter"><%= email%></p>
+                </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
