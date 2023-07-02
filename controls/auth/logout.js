@@ -1,4 +1,10 @@
+if (typeof localStorage === "undefined" || localStorage === null) {
+    const LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+}
+
 const {ctrlWrapper} = require("../../helpers");
+
 const logout = async (req, res, next) => {
 
     const {id} = req.user
@@ -10,10 +16,11 @@ const logout = async (req, res, next) => {
         if (err) {
             next(err)
         } else {
-            res.json({
-                message: 'Logout success'
-            })
-            // res.redirect('/home')
+            localStorage.removeItem('token')
+            // res.json({
+            //     message: 'Logout success'
+            // })
+            res.redirect('/')
         }
     })
 

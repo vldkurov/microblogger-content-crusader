@@ -60,16 +60,16 @@ const edit = async (req, res, next) => {
                 next(err)
             } else {
                 return result
-                    ? res.json({
-                        author: result.author,
-                        blog: result.blog,
-                        edit: result.edit
-                    })
-                    // ? res.render('pages/author/edit.html', {
+                    // ? res.json({
                     //     author: result.author,
                     //     blog: result.blog,
                     //     edit: result.edit
                     // })
+                    ? res.render('pages/author/edit.html', {
+                        author: result.author,
+                        blog: result.blog,
+                        edit: result.edit
+                    })
                     : res.json({
                         message: `No records found with the id ${params}`
                     })

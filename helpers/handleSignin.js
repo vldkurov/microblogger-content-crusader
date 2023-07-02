@@ -1,4 +1,10 @@
 const jwt = require("jsonwebtoken");
+
+if (typeof localStorage === "undefined" || localStorage === null) {
+    const LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+}
+
 const handleSignin = (rows, SECRET_KEY, res, next, email) => {
 
     const payload = {id: rows.id}
@@ -17,7 +23,7 @@ const handleSignin = (rows, SECRET_KEY, res, next, email) => {
         if (err) {
             next(err)
         } else {
-            // res.json({author: rows})
+            localStorage.setItem('token', JSON.stringify(rows.token));
             res.redirect('/author/home')
         }
     })

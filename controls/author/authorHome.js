@@ -6,12 +6,8 @@ const {ctrlWrapper} = require("../../helpers");
 
 const authorHome = async (req, res, next) => {
 
-    // const token = `Bearer` + ` ` + `${req.user.token}}`
+    const {id: owner} = req.user
 
-    // const {id: owner} = req.user
-    const owner = 1
-
-    // res.set('Authorization', token)
     let params = [owner]
 
     const result = {}
@@ -67,7 +63,7 @@ const authorHome = async (req, res, next) => {
                 // res.set("Content-Type", mime.contentType('text/css'));
                 // res.setHeader("Content-Type", mime.lookup('pages/author/authorHome.html'));
                 // res.set('Content-Type', mime.lookup('pages/author/authorHome.html'));
-                // res.set('Authorization', 'Bearer ')
+                res.set('Authorization', 'Bearer ')
                 return result
                     // ? res.json({
                     //     author: result.author,

@@ -49,7 +49,7 @@
                             <input name="id" type="hidden" value="<%= article.id %>">
                             <button class="btn btn-warning" type="submit">EDIT</button>
                         </form>
-                        <form action="/author/authorHome" method="POST">
+                        <form action="/author/home" method="POST">
                             <input name="id" type="hidden" value="<%= article.id %>">
                             <button class="btn btn-success" onclick="publish()" type="submit">PUBLISH</button>
                             <script>
@@ -109,7 +109,7 @@
                             </button>
                             <script>
                                 function share(id) {
-                                    alert(`http://localhost:3000/authorHome/article?id=${id}`);
+                                    alert(`http://localhost:3000/home/article?id=${id}`);
                                 }
                             </script>
                         </form>
@@ -138,6 +138,9 @@
 <footer>
     <%- include('../../partials/footer.html') %>
 </footer>
+
+<!---LOGOUT MODAL--->
+<%- include('../../components/logout-modal.html') %>
 
 <script crossorigin="anonymous"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"

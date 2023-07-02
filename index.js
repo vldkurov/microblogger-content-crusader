@@ -12,9 +12,6 @@ const instance = axios.create({
     baseURL: `http://localhost:${port}`
 })
 
-app.use(express.static('public'))
-// app.use(express.static('scripts'))
-
 const db_path = 'database'
 
 const db = new sqlite3.Database(`./${db_path}.db`, function (err) {
@@ -28,6 +25,9 @@ const db = new sqlite3.Database(`./${db_path}.db`, function (err) {
 })
 
 global.db = db;
+
+app.use(express.static('public'))
+// app.use(express.static('scripts'))
 
 const {mainRouter, authRouter, readerRouter, authorRouter, userRouter} = require('./routes')
 
@@ -56,11 +56,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get('/', (req, res) => {
     // res.send('Hello world')
     res.render('index.html')
-})
-
-app.use((req, res, next) => {
-    req.headers['User-Agent'] = 'zendx/sop API';
-    next()
 })
 
 app.use((req, res, next) => {

@@ -4,7 +4,7 @@ const validate = require('../middleware')
 
 const {schemas} = require('../models')
 
-const {authenticate} = require('../middleware')
+const {headers, authenticate} = require('../middleware')
 
 const router = express.Router();
 
@@ -17,10 +17,10 @@ router.post('/signup', validate.body(schemas.signupSchema), ctrl.signup)
 router.post('/signin', validate.body(schemas.signinSchema), ctrl.signin)
 
 // current
-router.get('/current', authenticate, ctrl.current)
+router.get('/current', headers, authenticate, ctrl.current)
 
 // logout
-router.post('/logout', authenticate, ctrl.logout)
+router.post('/logout', headers, authenticate, ctrl.logout)
 
 // sample
 // router.get('/sample', (req, res) => {

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {authenticate} = require('../middleware')
+const {headers, authenticate} = require('../middleware')
 
 const validate = require('../middleware')
 
@@ -9,22 +9,20 @@ const {schemas} = require('../models')
 
 const ctrl = require('../controls')
 
-router.get('/home',
-    // authenticate,
-    ctrl.authorHome)
+router.get('/home', headers, authenticate, ctrl.authorHome)
 
-router.post("/home", authenticate, ctrl.publish)
+router.post("/home", headers, authenticate, ctrl.publish)
 
-router.get("/article/edit", authenticate, ctrl.edit)
+router.get("/article/edit", headers, authenticate, ctrl.edit)
 
-router.post("/article/edit", authenticate, ctrl.update)
+router.post("/article/edit", headers, authenticate, ctrl.update)
 
-router.get("/article/draft", authenticate, ctrl.draft)
+router.get("/article/draft", headers, authenticate, ctrl.draft)
 
-router.post('/article/delete', authenticate, ctrl.remove)
+router.post('/article/delete', headers, authenticate, ctrl.remove)
 
-router.get("/settings", authenticate, ctrl.settings)
+router.get("/settings", headers, authenticate, ctrl.settings)
 
-router.post("/settings", authenticate, validate.body(schemas.settingsSchema), ctrl.updateSettings)
+router.post("/settings", headers, authenticate, validate.body(schemas.settingsSchema), ctrl.updateSettings)
 
 module.exports = router
