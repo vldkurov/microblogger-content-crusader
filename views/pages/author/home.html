@@ -43,11 +43,11 @@
                 <td><%= article.modified %></td>
                 <td>
                     <div style="display: flex">
-                        <form action="/author/article/edit" method="GET">
+                        <form action="/author/article/edit" method="GET" style="margin-right: 1px">
                             <input name="id" type="hidden" value="<%= article.id %>">
                             <button class="btn btn-warning" type="submit">EDIT</button>
                         </form>
-                        <form action="/author/home" method="POST">
+                        <form action="/author/home" method="POST" style="margin-right: 1px">
                             <input name="id" type="hidden" value="<%= article.id %>">
                             <button class="btn btn-success" onclick="publish()" type="submit">PUBLISH</button>
                             <script>
@@ -100,7 +100,7 @@
                 <td><%= article.likes %></td>
                 <td>
                     <div style="display: flex">
-                        <form>
+                        <form style="margin-right: 1px">
                             <input name="id" type="hidden" value="<%= article.id %>">
                             <button class="btn btn-primary" onclick="share('<%= article.id %>')" type="submit">
                                 SHARE

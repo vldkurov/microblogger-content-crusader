@@ -36,6 +36,7 @@ app.use('/author', authorRouter)
 app.use('/reader', readerRouter)
 
 const port = process.env.PORT || 3000;
+
 app.listen(port, () => {
     console.log(`Microblogger listening on port ${port}`);
 })
