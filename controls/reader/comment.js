@@ -8,7 +8,7 @@ const comment = async (req, res, next) => {
     let params = [comment, article_id, owner]
     let sql = 'INSERT INTO comments (body, posted, article_id, author_id) VALUES (?, datetime(\'now\', \'localtime\'), ?, ?)'
 
-    await db.run(sql, params, function (err, rows) {
+    await db.run(sql, params, function (err, _) {
         if (err) {
             next(err)
         } else {

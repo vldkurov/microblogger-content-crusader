@@ -7,7 +7,7 @@ const update = async (req, res, next) => {
     let params = [title, subtitle, body, id]
     let sql = 'UPDATE articles SET a_title=?, a_subtitle=?, modified=datetime(\'now\', \'localtime\'), body=? WHERE id=?'
 
-    await db.run(sql, params, function (err, rows) {
+    await db.run(sql, params, function (err, _) {
         if (err) {
             next(err)
         } else {

@@ -7,7 +7,7 @@ const draft = async (req, res, next) => {
     let params = ['Draft', owner]
     let sql = "INSERT INTO articles (created, modified, status, author_id) VALUES (datetime('now', 'localtime'), datetime('now', 'localtime'), ?, ?)"
 
-    await db.run(sql, params, function (err, rows) {
+    await db.run(sql, params, function (err, _) {
         if (err) {
             next(err)
         } else {

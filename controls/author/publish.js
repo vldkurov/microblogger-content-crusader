@@ -6,7 +6,7 @@ const publish = (req, res, next) => {
     let params = [0, 'Published', id]
     let sql = 'UPDATE articles SET published=datetime(\'now\', \'localtime\'), likes=?, status=? WHERE id=?'
 
-    db.run(sql, [...params], function (err, rows) {
+    db.run(sql, [...params], function (err, _) {
         if (err) {
             next(err)
         } else {
