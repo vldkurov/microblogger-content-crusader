@@ -5,9 +5,7 @@
 
 <body>
 
-<header>
-    <%- include('../../partials/header.html') %>
-</header>
+<%- include('../../partials/header.html', {isLogin: isLogin, path: path}) %>
 
 <main>
 
@@ -135,9 +133,7 @@
 
 </main>
 
-<footer>
-    <%- include('../../partials/footer.html') %>
-</footer>
+<%- include('../../partials/footer.html') %>
 
 <!---LOGOUT MODAL--->
 <%- include('../../components/logout-modal.html') %>

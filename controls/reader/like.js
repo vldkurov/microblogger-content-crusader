@@ -16,7 +16,6 @@ const like = async (req, res, next) => {
                 message: 'You already like this article'
             })
         } else {
-
             params = [owner, article_id]
             sql = 'INSERT INTO likes (author_id, article_id) VALUES (?, ?)'
 
@@ -27,7 +26,7 @@ const like = async (req, res, next) => {
             params = [value, article_id]
             sql = 'UPDATE articles SET likes=? WHERE id=?'
 
-            db.run(sql, params, function (err, rows) {
+            db.run(sql, params, function (err, _) {
                 if (err) {
                     next(err)
                 } else {

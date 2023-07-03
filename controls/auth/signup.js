@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 
-const {HttpError, handleSignin, ctrlWrapper} = require('../../helpers');
+const {handleSignin, ctrlWrapper} = require('../../helpers');
 
 const SECRET_KEY = process.env.SECRET || 'secret word';
 const signup = async (req, res, next) => {
@@ -21,7 +20,6 @@ const signup = async (req, res, next) => {
                 message: `E-mail ${email} already in use`
             })
         } else {
-
             params = [name, email, hashPassword]
             sql = 'INSERT INTO authors (name, email, password) VALUES (?, ?, ?)'
 
@@ -36,7 +34,6 @@ const signup = async (req, res, next) => {
                     if (err) {
                         next(err)
                     } else {
-
                         const {id} = rows
 
                         params = [id]

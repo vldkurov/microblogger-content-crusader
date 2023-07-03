@@ -9,43 +9,40 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav" style="margin-left: auto">
+                <% if (isLogin) { %>
                 <li class="nav-item logged-in">
-                    <a aria-current="page" class="nav-link active" href="/">Home</a>
+                    <a aria-current="page" class="nav-link <%= path==='/' ? 'active': '' %>"
+                       href="/" style="<%= path==='/' ? 'color: blue': 'color: black' %>">Home</a>
                 </li>
                 <li class="nav-item logged-in">
-                    <a class="nav-link" data-bs-target="#modal-account" data-bs-toggle="modal" href="#">Account</a>
+                    <a class="nav-link" data-bs-target="#modal-account"
+                       data-bs-toggle="modal" href="#" style="color: black">Account</a>
                 </li>
                 <li class="nav-item logged-in">
-                    <a class="nav-link" href="/author/home/">Author</a>
+                    <a aria-current="page" class="nav-link <%= path==='/author/home/' ? 'active': '' %>"
+                       href="/author/home/"
+                       style="<%= path==='/author/home/' ? 'color: blue': 'color: black' %>">Author</a>
                 </li>
                 <li class="nav-item logged-in">
-                    <a class="nav-link" href="/reader/home/">Reader</a>
+                    <a class="nav-link <%= path==='/reader/home/' ? 'active': '' %>" href="/reader/home/"
+                       style="<%= path==='/reader/home/' ? 'color: blue': 'color: black' %>">Reader</a>
                 </li>
                 <li class="nav-item logged-in">
-                    <a class="nav-link" data-bs-target="#modal-logout" data-bs-toggle="modal" href="#">Logout</a>
+                    <a class="nav-link" data-bs-target="#modal-logout" data-bs-toggle="modal" href="#"
+                       style="color: black">Logout</a>
+                </li>
+                <% } %>
+                <% if (!isLogin) { %>
+                <li class="nav-item logged-out">
+                    <a class="nav-link" data-bs-target="#modal-signin" data-bs-toggle="modal" href="#"
+                       style="color: black">Sign in</a>
                 </li>
                 <li class="nav-item logged-out">
-                    <a class="nav-link" data-bs-target="#modal-signin" data-bs-toggle="modal" href="#">Sign in</a>
+                    <a class="nav-link" data-bs-target="#modal-signup" data-bs-toggle="modal" href="#"
+                       style="color: black">Sign up</a>
                 </li>
-                <li class="nav-item logged-out">
-                    <a class="nav-link" data-bs-target="#modal-signup" data-bs-toggle="modal" href="#">Sign up</a>
-                </li>
+                <% } %>
             </ul>
         </div>
     </div>
 </nav>
-
-<!--<script>-->
-<!--    const loggedOutLinks = document.querySelectorAll('.logged-out')-->
-<!--    const loggedInLinks = document.querySelectorAll('.logged-in')-->
-
-<!--    const setUpUI = (author) => {-->
-<!--        if (author) {-->
-<!--            loggedInLinks.forEach(item => item.style.display = 'block')-->
-<!--            loggedOutLinks.forEach(item => item.style.display = 'none')-->
-<!--        } else {-->
-<!--            loggedInLinks.forEach(item => item.style.display = 'none')-->
-<!--            loggedOutLinks.forEach(item => item.style.display = 'block')-->
-<!--        }-->
-<!--    }-->
-<!--</script>-->

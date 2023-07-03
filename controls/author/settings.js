@@ -10,9 +10,7 @@ const settings = async (req, res, next) => {
     const result = {}
 
     await async.parallel([
-
             function (callback) {
-
                 let sql = 'SELECT id, name, email, token, isLogin FROM authors WHERE id=?'
 
                 db.get(sql, [...params], function (err, rows) {
@@ -24,9 +22,7 @@ const settings = async (req, res, next) => {
                     }
                 })
             },
-
             function (callback) {
-
                 let sql = "SELECT B.id, B.b_title, B.b_subtitle FROM authors LEFT JOIN blogs B ON authors.id=B.author_id WHERE authors.id=?"
 
                 db.get(sql, [...params], function (err, rows) {
@@ -44,13 +40,11 @@ const settings = async (req, res, next) => {
                 next(err)
             } else {
                 return result
-                    // ? res.json({
-                    //     author: result.author,
-                    //     blog: result.blog,
-                    // })
                     ? res.render('pages/author/settings.html', {
                         author: result.author,
+                        isLogin: result.author.isLogin,
                         blog: result.blog,
+                        path: '/author/home/'
                     })
                     : res.json({
                         message: `No records found with the id ${params}`

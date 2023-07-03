@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 
-const {ctrlWrapper, handleSignin, HttpError} = require("../../helpers");
+const {ctrlWrapper, handleSignin} = require("../../helpers");
 
 const SECRET_KEY = process.env.SECRET || 'secret word';
 const signin = (req, res, next) => {
@@ -27,14 +27,11 @@ const signin = (req, res, next) => {
                     res.status(401).json({
                         message: 'E-mail or password invalid'
                     })
-
                 } else {
                     handleSignin(rows, SECRET_KEY, res, next, email)
                 }
             }
         })
-
-
 }
 
 module.exports = {

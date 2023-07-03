@@ -12,14 +12,11 @@ const logout = async (req, res, next) => {
     let params = ['', 0, id]
     let sql = 'UPDATE authors SET token=?, isLogin=? WHERE id=?'
 
-    await db.run(sql, params, function (err, rows) {
+    await db.run(sql, params, function (err, _) {
         if (err) {
             next(err)
         } else {
             localStorage.removeItem('token')
-            // res.json({
-            //     message: 'Logout success'
-            // })
             res.redirect('/')
         }
     })

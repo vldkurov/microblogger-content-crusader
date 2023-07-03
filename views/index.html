@@ -5,9 +5,7 @@
 
 <body>
 
-<header>
-    <%- include('./partials/header.html') %>
-</header>
+<%- include('./partials/header.html', {isLogin: isLogin, path: path}) %>
 
 <main>
 
@@ -17,14 +15,19 @@
             <h1 class="fs-1 fw-lighter">Welcome to Microblogger</h1>
         </div>
 
-
     </div>
 
 </main>
 
-<footer>
-    <%- include('./partials/footer.html') %>
-</footer>
+<%- include('./partials/footer.html') %>
+
+<!---ACCOUNT MODAL--->
+<% if (author) { %>
+<%- include('./components/account-modal.html', {name: author.name, email: author.email}) %>
+<% } %>
+
+<!---LOGOUT MODAL--->
+<%- include('./components/logout-modal.html') %>
 
 <!---SIGNUP MODAL--->
 <%- include('./components/signup-modal.html') %>

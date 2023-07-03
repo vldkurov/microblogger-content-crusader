@@ -46,5 +46,3 @@ const schemas = {
 }
 
 module.exports = schemas
-
-// errorMessage: 'The password must be at least 6 characters, and must contain a symbol'
