@@ -12,6 +12,7 @@ const authenticate = async (req, res, next) => {
     if (bearer !== 'Bearer') {
         next(HttpError(401))
     }
+
     try {
         const {id} = jwt.verify(token, SECRET_KEY)
         let params = [id]

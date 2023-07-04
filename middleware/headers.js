@@ -6,8 +6,8 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 const headers = async (req, res, next) => {
 
     const token = JSON.parse(localStorage.getItem('token'))
-
-    req.headers['authorization'] = 'Bearer' + ' ' + `${token}`
+    
+    req.headers['authorization'] = `Bearer ${token}`
 
     next()
 }

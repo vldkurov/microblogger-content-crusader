@@ -7,11 +7,14 @@ const main = async (req, res, next) => {
         if (err) {
             next(err)
         } else {
-            res.render('index.html', {
-                isLogin: rows.some(({isLogin}) => isLogin === 1),
-                author: rows.find(({isLogin}) => isLogin === 1),
-                path: '/'
-            })
+            return rows
+                ? res.render('index.html', {
+                    isLogin: rows.some(({isLogin}) => isLogin === 1),
+                    author: rows.find(({isLogin}) => isLogin === 1),
+                    path: '/'
+                }) : res.send({
+                    message: 'Something goes wrong, try again'
+                })
         }
     })
 

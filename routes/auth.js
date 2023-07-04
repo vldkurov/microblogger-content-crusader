@@ -2,7 +2,7 @@ const express = require('express');
 
 const {schemas} = require('../models')
 
-const {headers, validate, authenticate} = require('../middleware')
+const {headers, getCurrent, validate, authenticate} = require('../middleware')
 
 const router = express.Router();
 
