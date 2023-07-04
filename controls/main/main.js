@@ -3,6 +3,8 @@ const main = async (req, res, next) => {
 
     let sql = 'SELECT name, email, isLogin FROM authors'
 
+    // the page itself does not render any data, but passes user's credentials to modal partials,
+    // then user's data are collected and filtered upon 'isLogin' field
     await db.all(sql, function (err, rows) {
         if (err) {
             next(err)

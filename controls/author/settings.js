@@ -13,6 +13,7 @@ const settings = async (req, res, next) => {
             function (callback) {
                 let sql = 'SELECT id, name, email, token, isLogin FROM authors WHERE id=?'
 
+                // selects current user (author) upon id from request
                 db.get(sql, [...params], function (err, rows) {
                     if (err) {
                         return callback(err)
@@ -25,6 +26,7 @@ const settings = async (req, res, next) => {
             function (callback) {
                 let sql = "SELECT B.id, B.b_title, B.b_subtitle FROM authors LEFT JOIN blogs B ON authors.id=B.author_id WHERE authors.id=?"
 
+                // selects blog's record according to user's is to whom the blog belongs
                 db.get(sql, [...params], function (err, rows) {
                     if (err) {
                         return callback(err)

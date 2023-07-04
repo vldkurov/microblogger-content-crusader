@@ -6,6 +6,7 @@ const remove = async (req, res, next) => {
     let params = [id]
     let sql = 'DELETE FROM articles WHERE id=?'
 
+    // selects and removes article record according to article's id
     await db.run(sql, params, function (err, _) {
         if (err) {
             next(err)

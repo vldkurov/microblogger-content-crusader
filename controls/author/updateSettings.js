@@ -12,6 +12,7 @@ const updateSettings = async (req, res, next) => {
                 let params = [name, owner]
                 let sql = 'UPDATE authors SET name=? WHERE id=?'
 
+                // updates current user (author) record values - name
                 db.run(sql, params, function (err, _) {
                     if (err) {
                         return callback(err)
@@ -26,6 +27,7 @@ const updateSettings = async (req, res, next) => {
                 let params = [title, subtitle, blog_id]
                 let sql = "UPDATE blogs SET b_title=?, b_subtitle=? WHERE id=?"
 
+                // updates current user's blog record values - title, subtitle
                 db.run(sql, params, function (err, _) {
                     if (err) {
                         return callback(err)

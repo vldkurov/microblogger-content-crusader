@@ -13,6 +13,7 @@ const article = async (req, res, next) => {
             function (callback) {
                 let sql = 'SELECT id, name, isLogin FROM authors WHERE id=?'
 
+                // selects id, name and isLogin records for the current user (author)
                 db.get(sql, [...params], function (err, rows) {
                     if (err) {
                         return callback(err)
@@ -25,6 +26,7 @@ const article = async (req, res, next) => {
             function (callback) {
                 let sql = "SELECT B.b_title, B.b_subtitle FROM authors LEFT JOIN blogs B ON authors.id=B.author_id WHERE authors.id=?"
 
+                // selects current blog record
                 db.get(sql, [...params], function (err, rows) {
                     if (err) {
                         return callback(err)
@@ -39,6 +41,7 @@ const article = async (req, res, next) => {
                 params = [id]
                 let sql = 'SELECT articles.id, a_title, a_subtitle, created, modified, published, likes, status, body, name FROM articles, authors WHERE articles.id=? AND author_id=authors.id'
 
+                // selects only data for current article, current user (reader) can comment articles of any other authors
                 db.get(sql, params, function (err, rows) {
                     if (err) {
                         return callback(err)
@@ -49,9 +52,12 @@ const article = async (req, res, next) => {
                 })
             },
             function (callback) {
+                const {id} = req.query
+                params = [id]
                 let sql = 'SELECT comments.id, comments.body, comments.posted, comments.author_id, comments.article_id, name, articles.id FROM comments, authors, articles WHERE comments.article_id=articles.id AND comments.author_id=authors.id AND articles.id=? ORDER BY comments.posted DESC'
 
-                db.all(sql, [req.query.id], function (err, rows) {
+                // selects all comments for the current article
+                db.all(sql, params, function (err, rows) {
                     if (err) {
                         return callback(err)
                     } else {

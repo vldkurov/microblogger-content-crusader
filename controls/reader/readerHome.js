@@ -14,6 +14,7 @@ const readerHome = async (req, res, next) => {
             function (callback) {
                 let sql = 'SELECT name, email, token, isLogin FROM authors WHERE id=?'
 
+                // selects current user record from table 'authors'
                 db.get(sql, [...params], function (err, rows) {
                     if (err) {
                         return callback(err)
@@ -26,6 +27,7 @@ const readerHome = async (req, res, next) => {
             function (callback) {
                 let sql = "SELECT B.b_title, B.b_subtitle FROM authors LEFT JOIN blogs B ON authors.id=B.author_id WHERE authors.id=?"
 
+                // selects current user blog's record upon user id to whom the blog belongs
                 db.get(sql, [...params], function (err, rows) {
                     if (err) {
                         return callback(err)
@@ -36,9 +38,11 @@ const readerHome = async (req, res, next) => {
                 })
             },
             function (callback) {
-                let params = []
                 let sql = "SELECT * FROM articles ORDER BY published DESC"
 
+                // selects all the records from 'article' table which status is 'published';
+                // current user can browse all published articles from the db,
+                // articles published by other authors also included to the result page
                 db.all(sql, function (err, rows) {
                     if (err) {
                         return callback(err)
