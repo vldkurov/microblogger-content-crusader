@@ -132,3 +132,5 @@ dist
 # node localStorage
 scratch/
 
+# database
+database.db
