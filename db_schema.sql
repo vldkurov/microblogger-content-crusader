@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS authors
 CREATE TABLE IF NOT EXISTS blogs
 (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
-    b_title    TEXT NOT NULL DEFAULT 'Blog Title',
-    b_subtitle TEXT NOT NULL DEFAULT 'Blog Subtitle',
+    b_title    VARCHAR(255) NOT NULL DEFAULT 'Blog Title',
+    b_subtitle VARCHAR(255) NOT NULL DEFAULT 'Blog Subtitle',
     author_id  INT, --the user that the blog belongs to
     FOREIGN KEY (author_id) REFERENCES authors (id) ON DELETE CASCADE
 );
