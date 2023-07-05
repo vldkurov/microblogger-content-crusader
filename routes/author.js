@@ -34,7 +34,7 @@ router.post("/article/edit", headers, authenticate, ctrl.update)
 // article/draft, GET
 // inputs: current user (author) id
 // outputs: a new article draft record to table 'articles' with default data
-router.get("/article/draft", headers, authenticate, ctrl.draft)
+router.post("/article/draft", headers, authenticate, ctrl.draft)
 
 // article/delete, POST
 // inputs: distinct article id
