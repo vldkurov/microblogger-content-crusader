@@ -31,7 +31,7 @@ router.get("/article/edit", headers, authenticate, ctrl.edit)
 // outputs: updated article record, including the time of update
 router.post("/article/edit", headers, authenticate, ctrl.update)
 
-// article/draft, GET
+// article/draft, POST
 // inputs: current user (author) id
 // outputs: a new article draft record to table 'articles' with default data
 router.post("/article/draft", headers, authenticate, ctrl.draft)
