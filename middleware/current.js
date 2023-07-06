@@ -3,9 +3,9 @@ if (typeof localStorage === "undefined" || localStorage === null) {
     localStorage = new LocalStorage('./scratch');
 }
 
-const getCurrent = async (req, res, next) => {
+const current = async (req, res, next) => {
     try {
-        const token = JSON.parse(localStorage.getItem('token'))
+        const {id, token} = JSON.parse(localStorage.getItem('author'))
 
         let params = [token]
         let sql = 'SELECT token FROM authors WHERE token=?'
@@ -14,11 +14,19 @@ const getCurrent = async (req, res, next) => {
             if (err) {
                 next(err)
             } else if (!rows || !rows.token || rows.token !== token) {
-                // res.send('No rows found')
-                localStorage.removeItem('token')
-                res.redirect('/')
+
+                localStorage.removeItem('author')
+
+                params = ['', 0, id]
+                sql = "UPDATE authors SET token=?, isLogin=? WHERE id=?"
+                db.run(sql, params, function (err) {
+                    if (err) {
+                        next(err)
+                    } else {
+                        res.redirect('/')
+                    }
+                })
             } else {
-                // res.json(rows.token)
                 next()
             }
         })
@@ -27,4 +35,4 @@ const getCurrent = async (req, res, next) => {
     }
 }
 
-module.exports = getCurrent
+module.exports = current

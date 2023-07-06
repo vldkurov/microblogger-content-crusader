@@ -1,11 +1,11 @@
 const authenticate = require('./authenticate')
 const validate = require('./validate')
 const headers = require('./headers')
-const getCurrent = require('./getCurrent')
+const current = require('./current')
 
 module.exports = {
     authenticate,
     validate,
     headers,
-    getCurrent
+    current
 }
