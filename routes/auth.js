@@ -2,7 +2,7 @@ const express = require('express');
 
 const {schemas} = require('../models')
 
-const {current, headers, validate, authenticate} = require('../middleware')
+const {verifyToken, current, headers, validate, authenticate} = require('../middleware')
 
 const router = express.Router();
 
@@ -15,6 +15,6 @@ router.post('/signup', validate(schemas.signupSchema), ctrl.signup)
 router.post('/signin', validate(schemas.signinSchema), ctrl.signin)
 
 // logout - ends current user session;
-router.post('/logout', current, headers, authenticate, ctrl.logout)
+router.post('/logout', verifyToken, current, headers, authenticate, ctrl.logout)
 
 module.exports = router

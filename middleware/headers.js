@@ -10,6 +10,7 @@ const headers = async (req, res, next) => {
     req.headers['authorization'] = `Bearer ${token}`
 
     next()
+
 }
 
 module.exports = headers
